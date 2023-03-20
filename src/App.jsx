@@ -24,12 +24,12 @@ function App() {
 
   return (
     
-    <>
+    <div className='app'>
     {
       friendList.map(friend => <Friend name={friend.name} phone={friend.phone}></Friend>)
     }
     {/* <Friend name="Mozmmeml" phone="+0711499999" > </Friend> */}
-    </>
+    </div>
   )
 }
 
