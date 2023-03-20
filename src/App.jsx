@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Friend from './Friend'
+import External from './External';
 
 const friendList = [
   {
@@ -28,13 +29,22 @@ function App() {
 
   const [name, setName] = useState('Imran');
   const randomName = () => setName(friends[Math.floor(Math.random()* friends.length)])
+
+
+  // load data using api 
+  const [users, setUsers] = useState([]);
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(data =>setUsers(data))
+  },[])
   
   return (
     
     <div className='app'>
-    {
+    {/* {
       friendList.map(friend => <Friend name={friend.name} phone={friend.phone}></Friend>)
-    }
+    } */}
 
     {/* use state  */}
     <p>{count}</p>
@@ -44,6 +54,11 @@ function App() {
     <p>{name}</p>
     <button onClick={randomName}>Random Name</button>
     {/* <Friend name="Mozmmeml" phone="+0711499999" > </Friend> */}
+
+    {
+      users.map(user=><External nam={user.name} email={user.email}></External>)
+    }
+
     </div>
   )
 }
