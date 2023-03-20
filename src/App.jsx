@@ -4,11 +4,32 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Friend from './Friend'
 
+const friendList = [
+  {
+    name: "Mozammel",
+    phone: "+888880",
+  },
+  {
+    name: "Moza",
+    phone: "+88999",
+  },
+  {
+    name: "zammel",
+    phone: "+11128880",
+  },
+]
+
 function App() {
-  const [count, setCount] = useState(0)
+  const friends = ["Mozammel", "Naser", "Sharup", "Sultana"]
 
   return (
-  <Friend name="Mozmmeml" phone="+0711499999" > </Friend>
+    
+    <>
+    {
+      friendList.map(friend => <Friend name={friend.name} phone={friend.phone}></Friend>)
+    }
+    {/* <Friend name="Mozmmeml" phone="+0711499999" > </Friend> */}
+    </>
   )
 }
 
