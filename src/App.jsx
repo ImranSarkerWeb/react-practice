@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Friend from './Friend'
-import External from './External';
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import Friend from "./Friend";
+import External from "./External";
+import Countries from "./component/Countries/Countries";
 
 const friendList = [
   {
@@ -18,49 +19,52 @@ const friendList = [
     name: "zammel",
     phone: "+11128880",
   },
-]
+];
 
 function App() {
-  const friends = ["Mozammel", "Naser", "Sharup", "Sultana"]
+  const friends = ["Mozammel", "Naser", "Sharup", "Sultana"];
 
   const [count, setCount] = useState(0);
   const countIncrease = () => setCount(count + 1);
-  const countDecrease = ()=> setCount(count-1);
+  const countDecrease = () => setCount(count - 1);
 
-  const [name, setName] = useState('Imran');
-  const randomName = () => setName(friends[Math.floor(Math.random()* friends.length)])
+  const [name, setName] = useState("Imran");
+  const randomName = () =>
+    setName(friends[Math.floor(Math.random() * friends.length)]);
 
-
-  // load data using api 
+  // load data using api
   const [users, setUsers] = useState([]);
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(res => res.json())
-    .then(data =>setUsers(data))
-  },[])
-  
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+
   return (
-    
-    <div className='app'>
-    {/* {
+    <div className="app">
+      {/* {
       friendList.map(friend => <Friend name={friend.name} phone={friend.phone}></Friend>)
     } */}
 
-    {/* use state  */}
-    <p>{count}</p>
-    <button onClick={countIncrease}>Increase</button>
-    <button onClick={countDecrease}>Decrease</button>
+      {/* use state  */}
+      <p>{count}</p>
+      <button onClick={countIncrease}>Increase</button>
+      <button onClick={countDecrease}>Decrease</button>
 
-    <p>{name}</p>
-    <button onClick={randomName}>Random Name</button>
-    {/* <Friend name="Mozmmeml" phone="+0711499999" > </Friend> */}
+      <p>{name}</p>
+      <button onClick={randomName}>Random Name</button>
+      {/* <Friend name="Mozmmeml" phone="+0711499999" > </Friend> */}
 
-    {
-      users.map(user=><External nam={user.name} email={user.email}></External>)
-    }
+      <div className="users">
+        {users.map((user) => (
+          <External key={user.id} nam={user.name} email={user.email}></External>
+        ))}
+      </div>
+      <h2>Tour All Country Using API!</h2>
 
+      <div>{<Countries></Countries>}</div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
